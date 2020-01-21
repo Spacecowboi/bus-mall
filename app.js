@@ -11,7 +11,7 @@ var middleIndex = null;
 var rightIndex = null;
 
 var votes = 0;
-var maxVotes = 5;
+var maxVotes = 25;
 
 // storage array for product "object" instances
 
@@ -64,8 +64,21 @@ var handleClickonProduct = function (event){
   }else if (productClicked === 'img3'){
     Product.everyImage[middleIndex].clicked++;
   }
-  renderProduct();
+  if(votes === maxVotes){
+    products.removeEventListener('click', handleClickonProduct);
+    alert('Thanks for voting!'); //stops after 25
+
+    for(var num = 0; num < Product.everyImage.length; i++){
+      var productMath = Product.everyImage[i];
+      console.log(`${productMath.name} recieved ${productMath.clicked} votes with ${productMath.views} views.`);
+    }
+  }else{
+    renderProduct();
+    //console.log(productMath);
+  }
 };
+
+
 
 //building new instances for constructor function
 
