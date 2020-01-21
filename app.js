@@ -45,8 +45,12 @@ function renderProduct(){
   } while
   (leftIndex === rightIndex || rightIndex === middleIndex || leftIndex === middleIndex);
   imageOne.src = Product.everyImage[leftIndex].image;
+  Product.everyImage[leftIndex].views++;
   imageTwo.src = Product.everyImage[middleIndex].image;
+  Product.everyImage[rightIndex].views++;
   imageThree.src = Product.everyImage[rightIndex].image;
+  Product.everyImage[middleIndex].views++;
+
 
 };
 
@@ -68,8 +72,8 @@ var handleClickonProduct = function (event){
     products.removeEventListener('click', handleClickonProduct);
     alert('Thanks for voting!'); //stops after 25
 
-    for(var num = 0; num < Product.everyImage.length; i++){
-      var productMath = Product.everyImage[i];
+    for(var num = 0; num < Product.everyImage.length; num++){
+      var productMath = Product.everyImage[num];
       console.log(`${productMath.name} recieved ${productMath.clicked} votes with ${productMath.views} views.`);
     }
   }else{
@@ -97,7 +101,7 @@ new Product ('pen', '/img/pen.jpg');
 new Product ('pet-sweep.jpg', '/img/pet-sweep.jpg');
 new Product ('scissors', '/img/scissors.jpg');
 new Product ('shark', '/img/shark.jpg');
-new Product ('sweep', '/img/sweep.jpg');
+new Product ('sweep', '/img/sweep.png');
 new Product ('tauntaun', '/img/tauntaun.jpg');
 new Product ('unicorn', '/img/unicorn.jpg');
 new Product ('usb', '/img/usb.gif');
