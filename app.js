@@ -73,7 +73,8 @@ var handleClickonProduct = function (event){
   }else if(productClicked === 'img2'){
     Product.everyImage[rightIndex].clicked++;
   }else if (productClicked === 'img3'){
-    Product.everyImage[middleIndex].clicked++;
+    Product.everyImage[middleIndex].clicked++; //code breaks here
+    console.log('I made it this far', productClicked);
   }
   if(votes === maxVotes){
     products.removeEventListener('click', handleClickonProduct);
@@ -81,7 +82,7 @@ var handleClickonProduct = function (event){
 
     for(var num = 0; num < Product.everyImage.length; num++){
       var productMath = Product.everyImage[num];
-      console.log(`${productMath.name} recieved ${productMath.clicked} votes with ${productMath.views} views.`);
+      console.log(`${productMath.name} recieved ${productMath.clicked} votes with ${productMath.views} views.`); //spicy jquery
     }
   }else{
     renderProduct();
@@ -120,8 +121,8 @@ new Product ('wine-glass', '/img/wine-glass.jpg');
 products.addEventListener('click', handleClickonProduct);
 
 
-console.log(Product.everyImage);
-console.log(randomProduct());
+//console.log(Product.everyImage);
+//console.log(randomProduct());
 
 var button = document.getElementById('populate');
 button.addEventListener('click', makeChart); //naming issue?
@@ -138,18 +139,18 @@ function makeChart(){
 
   var buildChart = document.getElementById('busChart').getContext('2d');
 
-  new Chart(buildChart, {
+  new Chart (buildChart, {
     type: 'bar',
     data: {
       labels: labelData,
       datasets: [{
         label: '# of Clicks',
         data: clickData,
-        backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Aqua', 'Pink'],
       }, {
         label: '# of Views',
         data: viewData,
-        backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Aqua', 'Pink'],
       }],
     },
     options: {
@@ -163,3 +164,4 @@ function makeChart(){
     },
   });
 }
+renderProduct();
