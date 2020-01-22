@@ -13,7 +13,9 @@ var rightIndex = null;
 var votes = 0;
 var maxVotes = 25;
 
-// storage array for product "object" instances
+// storage arrays
+
+var historyArray = ['', '', ''];
 
 Product.everyImage = [];
 
@@ -36,14 +38,16 @@ function Product(name, image){
 }
 
 //Render Function
-
+// Need to populate new array and add render to new array to shuffle images per click
 function renderProduct(){
   do{
     leftIndex = randomProduct();
     rightIndex = randomProduct();
     middleIndex = randomProduct();
   } while
-  (leftIndex === rightIndex || rightIndex === middleIndex || leftIndex === middleIndex);
+  (leftIndex === rightIndex || rightIndex === middleIndex || leftIndex === middleIndex || historyArray.includes(leftIndex) || historyArray.includes(rightIndex) || historyArray.includes(middleIndex));
+
+
   imageOne.src = Product.everyImage[leftIndex].image;
   Product.everyImage[leftIndex].views++;
   imageTwo.src = Product.everyImage[middleIndex].image;
@@ -51,8 +55,11 @@ function renderProduct(){
   imageThree.src = Product.everyImage[rightIndex].image;
   Product.everyImage[middleIndex].views++;
 
-
+  historyArray[0] = leftIndex;
+  historyArray[1] = rightIndex;
+  historyArray[2] = middleIndex;
 };
+
 
 //building the event handler
 var handleClickonProduct = function (event){
@@ -115,4 +122,44 @@ products.addEventListener('click', handleClickonProduct);
 
 console.log(Product.everyImage);
 console.log(randomProduct());
-renderProduct();
+
+var button = document.getElementById('populate');
+button.addEventListener('click', makeChart); //naming issue?
+function makeChart(){
+  var labelData = [];
+  var clickData = [];
+  var viewData = [];
+  for (var i = 0; i < Product.everyImage.length; i++){
+    labelData.push(Product.everyImage[i].name);
+    clickData.push(Product.everyImage[i].clicked);
+    viewData.push(Product.everyImage[i].views);
+  }
+
+
+  var buildChart = document.getElementById('busChart').getContext('2d');
+
+  new Chart(buildChart, {
+    type: 'bar',
+    data: {
+      labels: labelData,
+      datasets: [{
+        label: '# of Clicks',
+        data: clickData,
+        backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      }, {
+        label: '# of Views',
+        data: viewData,
+        backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      }],
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          },
+        }],
+      },
+    },
+  });
+}
