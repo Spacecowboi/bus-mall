@@ -44,6 +44,22 @@ function updateProducts(){
   localStorage.setItem('products', arrayString);
 }
 
+//Retrieve data from localStorage and use JSON parse to show the new JS object. Then set the current array to the data retrieved from LocalStorage.
+function getUpdatedProducts(){
+  if(localStorage.length > 0){
+    //console.log('It works!');
+    //getting the data from our localStorage
+    var storageData = localStorage.getItem('products');
+    //JSON parse to show new JS object in literal notation
+    var productObjects = JSON.parse(storageData);
+    console.log(storageData);
+    console.log(productObjects);
+    //set existing array to the data that is converted from localStorage
+    Product.everyImage = productObjects;
+  }
+  renderProduct();
+}
+
 //Render Function
 // Need to populate new array and add render to new array to shuffle images per click
 function renderProduct(){
@@ -81,7 +97,7 @@ var handleClickonProduct = function (event){
     Product.everyImage[rightIndex].clicked++;
   }else if (productClicked === 'img3'){
     Product.everyImage[middleIndex].clicked++;
-    console.log('I made it this far', productClicked);
+    //console.log('I made it this far', productClicked);
   }
   if(votes === maxVotes){
     products.removeEventListener('click', handleClickonProduct);
@@ -93,6 +109,7 @@ var handleClickonProduct = function (event){
     }
   }else{
     renderProduct();
+    updateProducts();
     //console.log(productMath);
   }
 };
@@ -171,4 +188,4 @@ function makeChart(){
     },
   });
 }
-renderProduct();
+getUpdatedProducts();
