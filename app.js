@@ -37,6 +37,13 @@ function Product(name, image){
   Product.everyImage.push(this);
 }
 
+//Converting Product array into JSON for local storage
+function updateProducts(){
+  var arrayString = JSON.stringify(Product.everyImage);
+  // Here I am putting the new string into local storage, so step 1 essentially.
+  localStorage.setItem('products', arrayString);
+}
+
 //Render Function
 // Need to populate new array and add render to new array to shuffle images per click
 function renderProduct(){
@@ -73,7 +80,7 @@ var handleClickonProduct = function (event){
   }else if(productClicked === 'img2'){
     Product.everyImage[rightIndex].clicked++;
   }else if (productClicked === 'img3'){
-    Product.everyImage[middleIndex].clicked++; //code breaks here
+    Product.everyImage[middleIndex].clicked++;
     console.log('I made it this far', productClicked);
   }
   if(votes === maxVotes){
