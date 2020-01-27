@@ -83,6 +83,8 @@ function renderProduct(){
   historyArray[2] = middleIndex;
 };
 
+//debugger;
+
 
 //building the event handler
 var handleClickonProduct = function (event){
