@@ -52,8 +52,8 @@ function getUpdatedProducts(){
     var storageData = localStorage.getItem('products');
     //JSON parse to show new JS object in literal notation
     var productObjects = JSON.parse(storageData);
-    console.log(storageData);
-    console.log(productObjects);
+    // console.log(storageData);
+    // console.log(productObjects);
     //set existing array to the data that is converted from localStorage
     Product.everyImage = productObjects;
   }
