@@ -141,7 +141,7 @@ new Product ('unicorn', 'img/unicorn.jpg');
 new Product ('usb', 'img/usb.gif');
 new Product ('water-can', 'img/water-can.jpg');
 new Product ('wine-glass', 'img/wine-glass.jpg');
-//test for GH push
+//test for GH push 2
 
 // building the event listener
 
